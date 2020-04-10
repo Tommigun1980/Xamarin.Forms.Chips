@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageVersion>0.1</PackageVersion>
+    <Authors>Tommi Kiviniemi</Authors>
+    <Description>Chip support for Xamarin.Forms.</Description>
+    <Copyright>Copyright © 2020</Copyright>
+    <Owners>Tommi Kiviniemi</Owners>
+    <Summary>Chip support for Xamarin.Forms.</Summary>
+    <PackageTags>Chip, Chips, Xamarin, Xamarin.Forms, Material</PackageTags>
+    <Title>Xamarin.Forms.Chips</Title>
+    <PackageId>Xamarin.Forms.Chips</PackageId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.5-dev.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
+  </ItemGroup>
+</Project>
