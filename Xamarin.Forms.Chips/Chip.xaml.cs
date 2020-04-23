@@ -242,7 +242,7 @@ namespace Xamarin.Forms.Chips
                     this.RefreshVisualState();
                 }
 
-                if (!this.IsSelected)
+                if (this.IsSelected)
                 {
                     this.OnSelect?.Invoke(this, new EventArgs());
 
