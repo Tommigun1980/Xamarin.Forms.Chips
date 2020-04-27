@@ -3,6 +3,8 @@
 
 ![Chips](Doc/Chips.png)
 
+NuGet package available at https://www.nuget.org/packages/Xamarin.Forms.Chips/
+
 ## Usage
 
 Import the Chips assembly:
