@@ -10,13 +10,12 @@
     x:Name="chipRoot"
     x:DataType="controls:Chip"
     x:Class="Xamarin.Forms.Chips.Chip"
-    
-    HorizontalOptions="Center"
-    VerticalOptions="Center"
     HasShadow="False"
     CornerRadius="15"
-    Padding="10, 10"
-    Margin="0, 8">
+    VerticalOptions="Center"
+    HorizontalOptions="Center"
+    Padding="8, 5"
+    Margin="0, 0">
 
     <Frame.Resources>
         <ResourceDictionary>
@@ -47,14 +46,15 @@
 
     <Frame.Content>
         <StackLayout
+            Orientation="Horizontal"
             BindingContext="{Binding ., Source={Reference chipRoot}}"
-            x:DataType="controls:Chip"
-            Orientation="Horizontal">
-
+            x:DataType="controls:Chip">
+            
             <Image
                 IsVisible="{Binding Image, Converter={StaticResource HasValueConverter}}"
-                Source="{Binding Image}" />
-
+                Source="{Binding Image}"
+                d:IsVisible="False" />
+            
             <Label
                 IsVisible="{Binding Text, Converter={StaticResource HasValueConverter}}"
                 Text="{Binding Text}"
@@ -63,13 +63,16 @@
                 FontSize="{Binding FontSize}"
                 TextColor="{Binding TextColor}"
                 VerticalTextAlignment="Center"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand" />
+                HorizontalTextAlignment="Center" />
 
-            <ImageButton
+            <Image
                 IsVisible="{Binding CloseImage, Converter={StaticResource HasValueConverter}}"
                 Source="{Binding CloseImage}"
-                Clicked="CloseButton_Clicked" />
+                d:IsVisible="False">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="CloseButton_Clicked" />
+                </Image.GestureRecognizers>
+            </Image>
         </StackLayout>
     </Frame.Content>
 </Frame>

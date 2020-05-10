@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using Xamarin.Forms;
-using Xamarin.Essentials;
 
 namespace Xamarin.Forms.Chips
 {
@@ -215,9 +213,9 @@ namespace Xamarin.Forms.Chips
         {
             InitializeComponent();
 
-            this.LayoutChanged += (object sender, EventArgs e) =>
+            this.SizeChanged += (object sender, EventArgs e) =>
             {
-                this.CornerRadius = (float)(this.Height / DeviceDisplay.MainDisplayInfo.Density);
+                this.CornerRadius = (float)(this.Height * 0.5);
             };
         }
 

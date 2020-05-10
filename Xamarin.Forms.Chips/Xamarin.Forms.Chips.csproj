@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
     <Authors>Tommi Kiviniemi</Authors>
     <Description>Chip support for Xamarin.Forms.</Description>
     <Copyright>Copyright © 2020</Copyright>
@@ -21,7 +21,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="NuGet.Build.Packaging" Version="0.2.5-dev.8">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
