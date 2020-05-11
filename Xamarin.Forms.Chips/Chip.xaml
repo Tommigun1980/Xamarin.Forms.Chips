@@ -46,8 +46,10 @@
 
     <Frame.Content>
         <StackLayout
-            Orientation="Horizontal"
             BindingContext="{Binding ., Source={Reference chipRoot}}"
+            Orientation="Horizontal"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
             x:DataType="controls:Chip">
             
             <Image
@@ -62,6 +64,8 @@
                 FontFamily="{Binding FontFamily}"
                 FontSize="{Binding FontSize}"
                 TextColor="{Binding TextColor}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
                 VerticalTextAlignment="Center"
                 HorizontalTextAlignment="Center" />
 
