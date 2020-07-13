@@ -14,11 +14,11 @@ namespace Xamarin.Forms.Chips
         public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(
             nameof(FontSize), typeof(double), typeof(Chip), Device.GetNamedSize(NamedSize.Default, typeof(Label)));
 
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(
-            nameof(TextColor), typeof(Color), typeof(Chip), Color.DarkGray);
-
         public static readonly BindableProperty ImageProperty = BindableProperty.Create(
             nameof(Image), typeof(ImageSource), typeof(Chip));
+
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(
+            nameof(TextColor), typeof(Color), typeof(Chip), Color.DarkGray);
 
         public static readonly BindableProperty ClickedCommandProperty = BindableProperty.Create(
             nameof(ClickedCommand), typeof(ICommand), typeof(Chip));
@@ -56,11 +56,29 @@ namespace Xamarin.Forms.Chips
         public static readonly BindableProperty UnselectCommandParameterProperty = BindableProperty.Create(
             nameof(UnselectCommandParameterProperty), typeof(object), typeof(Chip));
 
+        public static readonly BindableProperty UnselectedImageProperty = BindableProperty.Create(
+            nameof(UnselectedImage), typeof(ImageSource), typeof(Chip));
+
+        public static readonly BindableProperty SelectedImageProperty = BindableProperty.Create(
+            nameof(SelectedImage), typeof(ImageSource), typeof(Chip));
+
+        public static readonly BindableProperty UnselectedCloseImageProperty = BindableProperty.Create(
+            nameof(UnselectedCloseImage), typeof(ImageSource), typeof(Chip));
+
+        public static readonly BindableProperty SelectedCloseImageProperty = BindableProperty.Create(
+            nameof(SelectedCloseImage), typeof(ImageSource), typeof(Chip));
+
         public static readonly BindableProperty UnselectedBackgroundColorProperty = BindableProperty.Create(
             nameof(UnselectedBackgroundColor), typeof(Color), typeof(Chip), Color.DarkOrange);
 
         public static readonly BindableProperty SelectedBackgroundColorProperty = BindableProperty.Create(
             nameof(SelectedBackgroundColor), typeof(Color), typeof(Chip), Color.Yellow);
+
+        public static readonly BindableProperty UnselectedTextColorProperty = BindableProperty.Create(
+            nameof(UnselectedTextColor), typeof(Color), typeof(Chip), Color.DarkGray);
+
+        public static readonly BindableProperty SelectedTextColorProperty = BindableProperty.Create(
+            nameof(SelectedTextColor), typeof(Color), typeof(Chip), Color.DarkGray);
 
         public static readonly BindableProperty UnselectedHasShadowProperty = BindableProperty.Create(
             nameof(UnselectedHasShadow), typeof(bool), typeof(Chip));
@@ -95,16 +113,16 @@ namespace Xamarin.Forms.Chips
             set => SetValue(Chip.FontSizeProperty, value);
         }
 
-        public Color TextColor
-        {
-            get => (Color)GetValue(Chip.TextColorProperty);
-            set => SetValue(Chip.TextColorProperty, value);
-        }
-
         public ImageSource Image
         {
             get => (ImageSource)GetValue(Chip.ImageProperty);
             set => SetValue(Chip.ImageProperty, value);
+        }
+
+        public Color TextColor
+        {
+            get => (Color)GetValue(Chip.TextColorProperty);
+            set => SetValue(Chip.TextColorProperty, value);
         }
 
         public ICommand ClickedCommand
@@ -179,6 +197,30 @@ namespace Xamarin.Forms.Chips
             set => SetValue(Chip.UnselectCommandParameterProperty, value);
         }
 
+        public ImageSource UnselectedImage
+        {
+            get => (ImageSource)GetValue(Chip.UnselectedImageProperty);
+            set => SetValue(Chip.UnselectedImageProperty, value);
+        }
+
+        public ImageSource SelectedImage
+        {
+            get => (ImageSource)GetValue(Chip.SelectedImageProperty);
+            set => SetValue(Chip.SelectedImageProperty, value);
+        }
+
+        public ImageSource UnselectedCloseImage
+        {
+            get => (ImageSource)GetValue(Chip.UnselectedCloseImageProperty);
+            set => SetValue(Chip.UnselectedCloseImageProperty, value);
+        }
+
+        public ImageSource SelectedCloseImage
+        {
+            get => (ImageSource)GetValue(Chip.SelectedCloseImageProperty);
+            set => SetValue(Chip.SelectedCloseImageProperty, value);
+        }
+
         public Color UnselectedBackgroundColor
         {
             get => (Color)GetValue(Chip.UnselectedBackgroundColorProperty);
@@ -189,6 +231,18 @@ namespace Xamarin.Forms.Chips
         {
             get => (Color)GetValue(Chip.SelectedBackgroundColorProperty);
             set => SetValue(Chip.SelectedBackgroundColorProperty, value);
+        }
+
+        public Color UnselectedTextColor
+        {
+            get => (Color)GetValue(Chip.UnselectedTextColorProperty);
+            set => SetValue(Chip.UnselectedTextColorProperty, value);
+        }
+
+        public Color SelectedTextColor
+        {
+            get => (Color)GetValue(Chip.SelectedTextColorProperty);
+            set => SetValue(Chip.SelectedTextColorProperty, value);
         }
 
         public bool UnselectedHasShadow
@@ -222,7 +276,11 @@ namespace Xamarin.Forms.Chips
         private void RefreshVisualState()
         {
             var stateName = this.IsToggleable ? (this.IsSelected ? "Selected" : "Unselected") : "Normal";
+
             VisualStateManager.GoToState(this, stateName);
+            VisualStateManager.GoToState(this.chipLabel, stateName);
+            VisualStateManager.GoToState(this.chipImage, stateName);
+            VisualStateManager.GoToState(this.chipCloseImage, stateName);
         }
 
         private void Clicked(object sender, EventArgs args)

@@ -53,13 +53,30 @@
             x:DataType="controls:Chip">
             
             <Image
-                IsVisible="{Binding Image, Converter={StaticResource HasValueConverter}}"
+                x:Name="chipImage"
                 Source="{Binding Image}"
-                d:IsVisible="False" />
+                IsVisible="{Binding Source, Source={RelativeSource Self}, Converter={StaticResource HasValueConverter}}"
+                d:IsVisible="False">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="Source" Value="{Binding SelectedImage}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Unselected">
+                            <VisualState.Setters>
+                                <Setter Property="Source" Value="{Binding UnselectedImage}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Image>
             
             <Label
-                IsVisible="{Binding Text, Converter={StaticResource HasValueConverter}}"
+                x:Name="chipLabel"
                 Text="{Binding Text}"
+                IsVisible="{Binding Text, Source={RelativeSource Self}, Converter={StaticResource HasValueConverter}}"
                 d:Text="Chip"
                 FontFamily="{Binding FontFamily}"
                 FontSize="{Binding FontSize}"
@@ -67,15 +84,46 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 VerticalTextAlignment="Center"
-                HorizontalTextAlignment="Center" />
+                HorizontalTextAlignment="Center">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="{Binding SelectedTextColor}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Unselected">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="{Binding UnselectedTextColor}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Label>
 
             <Image
-                IsVisible="{Binding CloseImage, Converter={StaticResource HasValueConverter}}"
+                x:Name="chipCloseImage"
                 Source="{Binding CloseImage}"
+                IsVisible="{Binding Source, Source={RelativeSource Self}, Converter={StaticResource HasValueConverter}}"
                 d:IsVisible="False">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="CloseButton_Clicked" />
                 </Image.GestureRecognizers>
+                
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="Source" Value="{Binding SelectedCloseImage}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Unselected">
+                            <VisualState.Setters>
+                                <Setter Property="Source" Value="{Binding UnselectedCloseImage}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
             </Image>
         </StackLayout>
     </Frame.Content>
