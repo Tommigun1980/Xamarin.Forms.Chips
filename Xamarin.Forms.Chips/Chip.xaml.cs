@@ -74,6 +74,18 @@ namespace Xamarin.Forms.Chips
         public static readonly BindableProperty SelectedBackgroundColorProperty = BindableProperty.Create(
             nameof(SelectedBackgroundColor), typeof(Color), typeof(Chip), Color.Yellow);
 
+        public static readonly BindableProperty UnselectedBackgroundProperty = BindableProperty.Create(
+            nameof(UnselectedBackground), typeof(Brush), typeof(Chip), Brush.Default);
+
+        public static readonly BindableProperty SelectedBackgroundProperty = BindableProperty.Create(
+            nameof(SelectedBackground), typeof(Brush), typeof(Chip), Brush.Default);
+
+        public static readonly BindableProperty UnselectedBorderColorProperty = BindableProperty.Create(
+            nameof(UnselectedBorderColor), typeof(Color), typeof(Chip), Color.Yellow);
+
+        public static readonly BindableProperty SelectedBorderColorProperty = BindableProperty.Create(
+            nameof(SelectedBorderColor), typeof(Color), typeof(Chip), Color.DarkOrange);
+
         public static readonly BindableProperty UnselectedTextColorProperty = BindableProperty.Create(
             nameof(UnselectedTextColor), typeof(Color), typeof(Chip), Color.DarkGray);
 
@@ -231,6 +243,30 @@ namespace Xamarin.Forms.Chips
         {
             get => (Color)GetValue(Chip.SelectedBackgroundColorProperty);
             set => SetValue(Chip.SelectedBackgroundColorProperty, value);
+        }
+
+        public Brush UnselectedBackground
+        {
+            get => (Brush)GetValue(Chip.UnselectedBackgroundProperty);
+            set => SetValue(Chip.UnselectedBackgroundProperty, value);
+        }
+
+        public Brush SelectedBackground
+        {
+            get => (Brush)GetValue(Chip.SelectedBackgroundProperty);
+            set => SetValue(Chip.SelectedBackgroundProperty, value);
+        }
+
+        public Color UnselectedBorderColor
+        {
+            get => (Color)GetValue(Chip.UnselectedBorderColorProperty);
+            set => SetValue(Chip.UnselectedBorderColorProperty, value);
+        }
+
+        public Color SelectedBorderColor
+        {
+            get => (Color)GetValue(Chip.SelectedBorderColorProperty);
+            set => SetValue(Chip.SelectedBorderColorProperty, value);
         }
 
         public Color UnselectedTextColor

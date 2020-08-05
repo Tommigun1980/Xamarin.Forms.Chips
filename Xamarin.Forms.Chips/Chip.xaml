@@ -32,12 +32,16 @@
             <VisualState x:Name="Selected">
                 <VisualState.Setters>
                     <Setter Property="BackgroundColor" Value="{Binding SelectedBackgroundColor, Source={Reference chipRoot}}" />
+                    <Setter Property="Background" Value="{Binding SelectedBackground, Source={Reference chipRoot}}" />
+                    <Setter Property="BorderColor" Value="{Binding SelectedBorderColor, Source={Reference chipRoot}}" />
                     <Setter Property="HasShadow" Value="{Binding SelectedHasShadow, Source={Reference chipRoot}}" />
                 </VisualState.Setters>
             </VisualState>
             <VisualState x:Name="Unselected">
                 <VisualState.Setters>
                     <Setter Property="BackgroundColor" Value="{Binding UnselectedBackgroundColor, Source={Reference chipRoot}}" />
+                    <Setter Property="Background" Value="{Binding UnselectedBackground, Source={Reference chipRoot}}" />
+                    <Setter Property="BorderColor" Value="{Binding UnselectedBorderColor, Source={Reference chipRoot}}" />
                     <Setter Property="HasShadow" Value="{Binding UnselectedHasShadow, Source={Reference chipRoot}}" />
                 </VisualState.Setters>
             </VisualState>
