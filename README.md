@@ -35,7 +35,24 @@ More advanced example:
     SelectCommand="{Binding ChipSelectedCommand}"
     SelectCommandParameter="{Binding SomeParameter}"
     UnselectCommand="{Binding ChipUnselectedCommand}"
-    UnselectCommandParameter="{Binding SomeParameter}" />
+    UnselectCommandParameter="{Binding SomeParameter}">
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CommonStates">
+            <VisualState x:Name="Selected">
+                <VisualState.Setters>
+                    <Setter Property="Style" Value="{StaticResource ChipStyleSelected}" />
+                    <Setter Property="CloseImage" Value="SelectedChipCloseImage" />
+                </VisualState.Setters>
+            </VisualState>
+            <VisualState x:Name="Normal">
+                <VisualState.Setters>
+                    <Setter Property="Style" Value="{StaticResource ChipStyleSelectable}" />
+                    <Setter Property="CloseImage" Value="UnselectedChipCloseImage" />
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+</chips:Chip>
 ```
 
 See [Chip.xaml.cs](Xamarin.Forms.Chips/Chip.xaml.cs) for all bindable properties.
