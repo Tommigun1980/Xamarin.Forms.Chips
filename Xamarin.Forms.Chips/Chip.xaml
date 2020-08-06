@@ -7,15 +7,15 @@
     mc:Ignorable="d"
     xmlns:converters="clr-namespace:Xamarin.Forms.Chips.Converters"
     xmlns:controls="clr-namespace:Xamarin.Forms.Chips"
-    x:Name="chipRoot"
-    x:DataType="controls:Chip"
-    x:Class="Xamarin.Forms.Chips.Chip"
     HasShadow="False"
     CornerRadius="15"
     VerticalOptions="Center"
     HorizontalOptions="Center"
     Padding="8, 5"
-    Margin="0, 0">
+    Margin="0, 0"
+    x:DataType="controls:Chip"
+    x:Class="Xamarin.Forms.Chips.Chip"
+    x:Name="chipRoot">
 
     <Frame.Resources>
         <ResourceDictionary>
@@ -27,107 +27,36 @@
         <TapGestureRecognizer Tapped="Clicked" />
     </Frame.GestureRecognizers>
 
-    <VisualStateManager.VisualStateGroups>
-        <VisualStateGroup x:Name="CommonStates">
-            <VisualState x:Name="Selected">
-                <VisualState.Setters>
-                    <Setter Property="BackgroundColor" Value="{Binding SelectedBackgroundColor, Source={Reference chipRoot}}" />
-                    <Setter Property="Background" Value="{Binding SelectedBackground, Source={Reference chipRoot}}" />
-                    <Setter Property="BorderColor" Value="{Binding SelectedBorderColor, Source={Reference chipRoot}}" />
-                    <Setter Property="HasShadow" Value="{Binding SelectedHasShadow, Source={Reference chipRoot}}" />
-                </VisualState.Setters>
-            </VisualState>
-            <VisualState x:Name="Unselected">
-                <VisualState.Setters>
-                    <Setter Property="BackgroundColor" Value="{Binding UnselectedBackgroundColor, Source={Reference chipRoot}}" />
-                    <Setter Property="Background" Value="{Binding UnselectedBackground, Source={Reference chipRoot}}" />
-                    <Setter Property="BorderColor" Value="{Binding UnselectedBorderColor, Source={Reference chipRoot}}" />
-                    <Setter Property="HasShadow" Value="{Binding UnselectedHasShadow, Source={Reference chipRoot}}" />
-                </VisualState.Setters>
-            </VisualState>
-        </VisualStateGroup>
-    </VisualStateManager.VisualStateGroups>
-
     <Frame.Content>
         <StackLayout
-            BindingContext="{Binding ., Source={Reference chipRoot}}"
             Orientation="Horizontal"
             VerticalOptions="Center"
-            HorizontalOptions="Center"
-            x:DataType="controls:Chip">
+            HorizontalOptions="Center">
             
             <Image
-                x:Name="chipImage"
-                Source="{Binding Image}"
-                IsVisible="{Binding Source, Source={RelativeSource Self}, Converter={StaticResource HasValueConverter}}"
-                d:IsVisible="False">
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Selected">
-                            <VisualState.Setters>
-                                <Setter Property="Source" Value="{Binding SelectedImage}" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Unselected">
-                            <VisualState.Setters>
-                                <Setter Property="Source" Value="{Binding UnselectedImage}" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-            </Image>
+                Source="{Binding Image, Source={x:Reference chipRoot}}"
+                IsVisible="{Binding Image, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
+                d:IsVisible="False" />
             
             <Label
-                x:Name="chipLabel"
-                Text="{Binding Text}"
-                IsVisible="{Binding Text, Source={RelativeSource Self}, Converter={StaticResource HasValueConverter}}"
+                Text="{Binding Text, Source={x:Reference chipRoot}}"
+                IsVisible="{Binding Text, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
                 d:Text="Chip"
-                FontFamily="{Binding FontFamily}"
-                FontSize="{Binding FontSize}"
-                TextColor="{Binding TextColor}"
+                FontFamily="{Binding FontFamily, Source={x:Reference chipRoot}}"
+                FontSize="{Binding FontSize, Source={x:Reference chipRoot}}"
+                TextColor="{Binding TextColor, Source={x:Reference chipRoot}}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 VerticalTextAlignment="Center"
-                HorizontalTextAlignment="Center">
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Selected">
-                            <VisualState.Setters>
-                                <Setter Property="TextColor" Value="{Binding SelectedTextColor}" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Unselected">
-                            <VisualState.Setters>
-                                <Setter Property="TextColor" Value="{Binding UnselectedTextColor}" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-            </Label>
+                HorizontalTextAlignment="Center" />
 
             <Image
-                x:Name="chipCloseImage"
-                Source="{Binding CloseImage}"
-                IsVisible="{Binding Source, Source={RelativeSource Self}, Converter={StaticResource HasValueConverter}}"
+                Source="{Binding CloseImage, Source={x:Reference chipRoot}}"
+                IsVisible="{Binding CloseImage, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
                 d:IsVisible="False">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="CloseButton_Clicked" />
                 </Image.GestureRecognizers>
-                
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Selected">
-                            <VisualState.Setters>
-                                <Setter Property="Source" Value="{Binding SelectedCloseImage}" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Unselected">
-                            <VisualState.Setters>
-                                <Setter Property="Source" Value="{Binding UnselectedCloseImage}" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
             </Image>
         </StackLayout>
     </Frame.Content>

@@ -36,67 +36,28 @@ namespace Xamarin.Forms.Chips
             nameof(CloseImage), typeof(ImageSource), typeof(Chip));
 
         public static readonly BindableProperty IsToggleableProperty = BindableProperty.Create(
-            nameof(IsToggleable), typeof(bool), typeof(Chip), propertyChanged: OnIsSelectedPropertyChanged);
+            nameof(IsToggleable), typeof(bool), typeof(Chip), propertyChanged: StatePropertyChanged);
 
         public static readonly BindableProperty AutoToggleProperty = BindableProperty.Create(
             nameof(AutoToggle), typeof(bool), typeof(Chip));
 
         public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(
-            nameof(IsSelected), typeof(bool), typeof(Chip), false, BindingMode.TwoWay, propertyChanged: OnIsSelectedPropertyChanged);
+            nameof(IsSelected), typeof(bool), typeof(Chip), false, BindingMode.TwoWay, propertyChanged: StatePropertyChanged);
+
+        public static readonly BindableProperty IsDisabledProperty = BindableProperty.Create(
+            nameof(IsDisabled), typeof(bool), typeof(Chip), false, BindingMode.OneWay, propertyChanged: StatePropertyChanged);
 
         public static readonly BindableProperty SelectCommandProperty = BindableProperty.Create(
             nameof(SelectCommand), typeof(ICommand), typeof(Chip));
 
         public static readonly BindableProperty SelectCommandParameterProperty = BindableProperty.Create(
-            nameof(SelectCommandParameterProperty), typeof(object), typeof(Chip));
+            nameof(SelectCommandParameter), typeof(object), typeof(Chip));
 
         public static readonly BindableProperty UnselectCommandProperty = BindableProperty.Create(
             nameof(UnselectCommand), typeof(ICommand), typeof(Chip));
 
         public static readonly BindableProperty UnselectCommandParameterProperty = BindableProperty.Create(
-            nameof(UnselectCommandParameterProperty), typeof(object), typeof(Chip));
-
-        public static readonly BindableProperty UnselectedImageProperty = BindableProperty.Create(
-            nameof(UnselectedImage), typeof(ImageSource), typeof(Chip));
-
-        public static readonly BindableProperty SelectedImageProperty = BindableProperty.Create(
-            nameof(SelectedImage), typeof(ImageSource), typeof(Chip));
-
-        public static readonly BindableProperty UnselectedCloseImageProperty = BindableProperty.Create(
-            nameof(UnselectedCloseImage), typeof(ImageSource), typeof(Chip));
-
-        public static readonly BindableProperty SelectedCloseImageProperty = BindableProperty.Create(
-            nameof(SelectedCloseImage), typeof(ImageSource), typeof(Chip));
-
-        public static readonly BindableProperty UnselectedBackgroundColorProperty = BindableProperty.Create(
-            nameof(UnselectedBackgroundColor), typeof(Color), typeof(Chip), Color.DarkOrange);
-
-        public static readonly BindableProperty SelectedBackgroundColorProperty = BindableProperty.Create(
-            nameof(SelectedBackgroundColor), typeof(Color), typeof(Chip), Color.Yellow);
-
-        public static readonly BindableProperty UnselectedBackgroundProperty = BindableProperty.Create(
-            nameof(UnselectedBackground), typeof(Brush), typeof(Chip), Brush.Default);
-
-        public static readonly BindableProperty SelectedBackgroundProperty = BindableProperty.Create(
-            nameof(SelectedBackground), typeof(Brush), typeof(Chip), Brush.Default);
-
-        public static readonly BindableProperty UnselectedBorderColorProperty = BindableProperty.Create(
-            nameof(UnselectedBorderColor), typeof(Color), typeof(Chip), Color.Yellow);
-
-        public static readonly BindableProperty SelectedBorderColorProperty = BindableProperty.Create(
-            nameof(SelectedBorderColor), typeof(Color), typeof(Chip), Color.DarkOrange);
-
-        public static readonly BindableProperty UnselectedTextColorProperty = BindableProperty.Create(
-            nameof(UnselectedTextColor), typeof(Color), typeof(Chip), Color.DarkGray);
-
-        public static readonly BindableProperty SelectedTextColorProperty = BindableProperty.Create(
-            nameof(SelectedTextColor), typeof(Color), typeof(Chip), Color.DarkGray);
-
-        public static readonly BindableProperty UnselectedHasShadowProperty = BindableProperty.Create(
-            nameof(UnselectedHasShadow), typeof(bool), typeof(Chip));
-
-        public static readonly BindableProperty SelectedHasShadowProperty = BindableProperty.Create(
-            nameof(SelectedHasShadow), typeof(bool), typeof(Chip), true);
+            nameof(UnselectCommandParameter), typeof(object), typeof(Chip));
 
         public event EventHandler OnClicked;
 
@@ -185,6 +146,12 @@ namespace Xamarin.Forms.Chips
             set => SetValue(Chip.IsSelectedProperty, value);
         }
 
+        public bool IsDisabled
+        {
+            get => (bool)GetValue(Chip.IsDisabledProperty);
+            set => SetValue(Chip.IsDisabledProperty, value);
+        }
+
         public ICommand SelectCommand
         {
             get => (ICommand)GetValue(Chip.SelectCommandProperty);
@@ -209,91 +176,7 @@ namespace Xamarin.Forms.Chips
             set => SetValue(Chip.UnselectCommandParameterProperty, value);
         }
 
-        public ImageSource UnselectedImage
-        {
-            get => (ImageSource)GetValue(Chip.UnselectedImageProperty);
-            set => SetValue(Chip.UnselectedImageProperty, value);
-        }
-
-        public ImageSource SelectedImage
-        {
-            get => (ImageSource)GetValue(Chip.SelectedImageProperty);
-            set => SetValue(Chip.SelectedImageProperty, value);
-        }
-
-        public ImageSource UnselectedCloseImage
-        {
-            get => (ImageSource)GetValue(Chip.UnselectedCloseImageProperty);
-            set => SetValue(Chip.UnselectedCloseImageProperty, value);
-        }
-
-        public ImageSource SelectedCloseImage
-        {
-            get => (ImageSource)GetValue(Chip.SelectedCloseImageProperty);
-            set => SetValue(Chip.SelectedCloseImageProperty, value);
-        }
-
-        public Color UnselectedBackgroundColor
-        {
-            get => (Color)GetValue(Chip.UnselectedBackgroundColorProperty);
-            set => SetValue(Chip.UnselectedBackgroundColorProperty, value);
-        }
-
-        public Color SelectedBackgroundColor
-        {
-            get => (Color)GetValue(Chip.SelectedBackgroundColorProperty);
-            set => SetValue(Chip.SelectedBackgroundColorProperty, value);
-        }
-
-        public Brush UnselectedBackground
-        {
-            get => (Brush)GetValue(Chip.UnselectedBackgroundProperty);
-            set => SetValue(Chip.UnselectedBackgroundProperty, value);
-        }
-
-        public Brush SelectedBackground
-        {
-            get => (Brush)GetValue(Chip.SelectedBackgroundProperty);
-            set => SetValue(Chip.SelectedBackgroundProperty, value);
-        }
-
-        public Color UnselectedBorderColor
-        {
-            get => (Color)GetValue(Chip.UnselectedBorderColorProperty);
-            set => SetValue(Chip.UnselectedBorderColorProperty, value);
-        }
-
-        public Color SelectedBorderColor
-        {
-            get => (Color)GetValue(Chip.SelectedBorderColorProperty);
-            set => SetValue(Chip.SelectedBorderColorProperty, value);
-        }
-
-        public Color UnselectedTextColor
-        {
-            get => (Color)GetValue(Chip.UnselectedTextColorProperty);
-            set => SetValue(Chip.UnselectedTextColorProperty, value);
-        }
-
-        public Color SelectedTextColor
-        {
-            get => (Color)GetValue(Chip.SelectedTextColorProperty);
-            set => SetValue(Chip.SelectedTextColorProperty, value);
-        }
-
-        public bool UnselectedHasShadow
-        {
-            get => (bool)GetValue(Chip.UnselectedHasShadowProperty);
-            set => SetValue(Chip.UnselectedHasShadowProperty, value);
-        }
-
-        public bool SelectedHasShadow
-        {
-            get => (bool)GetValue(Chip.SelectedHasShadowProperty);
-            set => SetValue(Chip.SelectedHasShadowProperty, value);
-        }
-
-        private static void OnIsSelectedPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void StatePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (newValue != oldValue)
                 ((Chip)bindable).RefreshVisualState();
@@ -311,16 +194,16 @@ namespace Xamarin.Forms.Chips
 
         private void RefreshVisualState()
         {
-            var stateName = this.IsToggleable ? (this.IsSelected ? "Selected" : "Unselected") : "Normal";
+            var stateName = this.IsDisabled ? "Disabled" : (!this.IsToggleable ? "Normal" : (this.IsSelected ? "Selected" : "Normal"));
 
             VisualStateManager.GoToState(this, stateName);
-            VisualStateManager.GoToState(this.chipLabel, stateName);
-            VisualStateManager.GoToState(this.chipImage, stateName);
-            VisualStateManager.GoToState(this.chipCloseImage, stateName);
         }
 
         private void Clicked(object sender, EventArgs args)
         {
+            if (this.IsDisabled)
+                return;
+
             this.OnClicked?.Invoke(sender, args);
 
             if (this.ClickedCommand != null && this.ClickedCommand.CanExecute(this.ClickedCommandParameter))
@@ -353,6 +236,9 @@ namespace Xamarin.Forms.Chips
 
         private void CloseButton_Clicked(object sender, EventArgs args)
         {
+            if (this.IsDisabled)
+                return;
+
             this.OnClose?.Invoke(sender, args);
 
             if (this.CloseCommand != null && this.CloseCommand.CanExecute(this.CloseCommandParameter))
