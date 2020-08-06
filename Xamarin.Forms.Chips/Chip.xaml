@@ -36,6 +36,8 @@
             <Image
                 Source="{Binding Image, Source={x:Reference chipRoot}}"
                 IsVisible="{Binding Image, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
+                WidthRequest="{Binding ImageWidthRequest, Source={x:Reference chipRoot}}"
+                HeightRequest="{Binding ImageHeightRequest, Source={x:Reference chipRoot}}"
                 d:IsVisible="False" />
             
             <Label
@@ -53,6 +55,8 @@
             <Image
                 Source="{Binding CloseImage, Source={x:Reference chipRoot}}"
                 IsVisible="{Binding CloseImage, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
+                WidthRequest="{Binding ImageWidthRequest, Source={x:Reference chipRoot}}"
+                HeightRequest="{Binding ImageHeightRequest, Source={x:Reference chipRoot}}"
                 d:IsVisible="False">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="CloseButton_Clicked" />

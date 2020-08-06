@@ -17,6 +17,12 @@ namespace Xamarin.Forms.Chips
         public static readonly BindableProperty ImageProperty = BindableProperty.Create(
             nameof(Image), typeof(ImageSource), typeof(Chip));
 
+        public static readonly BindableProperty ImageWidthRequestProperty = BindableProperty.Create(
+            nameof(ImageWidthRequest), typeof(double), typeof(Chip), -1.0);
+
+        public static readonly BindableProperty ImageHeightRequestProperty = BindableProperty.Create(
+            nameof(ImageHeightRequest), typeof(double), typeof(Chip), -1.0);
+
         public static readonly BindableProperty TextColorProperty = BindableProperty.Create(
             nameof(TextColor), typeof(Color), typeof(Chip), Color.DarkGray);
 
@@ -90,6 +96,18 @@ namespace Xamarin.Forms.Chips
         {
             get => (ImageSource)GetValue(Chip.ImageProperty);
             set => SetValue(Chip.ImageProperty, value);
+        }
+
+        public double ImageWidthRequest
+        {
+            get => (double)GetValue(Chip.ImageWidthRequestProperty);
+            set => SetValue(Chip.ImageWidthRequestProperty, value);
+        }
+
+        public double ImageHeightRequest
+        {
+            get => (double)GetValue(Chip.ImageHeightRequestProperty);
+            set => SetValue(Chip.ImageHeightRequestProperty, value);
         }
 
         public Color TextColor
