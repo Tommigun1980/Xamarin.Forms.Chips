@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>1.0.7</PackageVersion>
+    <PackageVersion>1.0.8</PackageVersion>
     <Authors>Tommi Kiviniemi</Authors>
     <Description>Chip support for Xamarin.Forms.</Description>
     <Copyright>Copyright © 2020</Copyright>

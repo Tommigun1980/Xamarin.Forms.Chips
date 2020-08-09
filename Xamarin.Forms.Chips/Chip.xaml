@@ -36,32 +36,38 @@
             <Image
                 Source="{Binding Image, Source={x:Reference chipRoot}}"
                 IsVisible="{Binding Image, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
-                WidthRequest="{Binding ImageWidthRequest, Source={x:Reference chipRoot}}"
-                HeightRequest="{Binding ImageHeightRequest, Source={x:Reference chipRoot}}"
+                Style="{Binding ImageStyle, Source={x:Reference chipRoot}}"
+                d:IsVisible="False" />
+            <Label
+                Text="{Binding FontImageText, Source={x:Reference chipRoot}}"
+                IsVisible="{Binding FontImageText, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
+                Style="{Binding FontImageStyle, Source={x:Reference chipRoot}}"
                 d:IsVisible="False" />
             
             <Label
                 Text="{Binding Text, Source={x:Reference chipRoot}}"
                 IsVisible="{Binding Text, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
-                d:Text="Chip"
-                FontFamily="{Binding FontFamily, Source={x:Reference chipRoot}}"
-                FontSize="{Binding FontSize, Source={x:Reference chipRoot}}"
                 TextColor="{Binding TextColor, Source={x:Reference chipRoot}}"
+                Style="{Binding TextStyle, Source={x:Reference chipRoot}}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 VerticalTextAlignment="Center"
-                HorizontalTextAlignment="Center" />
-
-            <Image
-                Source="{Binding CloseImage, Source={x:Reference chipRoot}}"
-                IsVisible="{Binding CloseImage, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
-                WidthRequest="{Binding ImageWidthRequest, Source={x:Reference chipRoot}}"
-                HeightRequest="{Binding ImageHeightRequest, Source={x:Reference chipRoot}}"
-                d:IsVisible="False">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="CloseButton_Clicked" />
-                </Image.GestureRecognizers>
-            </Image>
+                HorizontalTextAlignment="Center"
+                d:Text="Chip" />
+            
+            <ImageButton
+                Source="{Binding CloseButtonImage, Source={x:Reference chipRoot}}"
+                IsVisible="{Binding CloseButtonImage, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
+                Style="{Binding CloseButtonImageStyle, Source={x:Reference chipRoot}}"
+                Clicked="CloseButton_Clicked"
+                d:IsVisible="False" />
+            <Button
+                Text="{Binding CloseButtonFontImageText, Source={x:Reference chipRoot}}"
+                IsVisible="{Binding CloseButtonFontImageText, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
+                Style="{Binding CloseButtonFontImageStyle, Source={x:Reference chipRoot}}"
+                BackgroundColor="Transparent"
+                Clicked="CloseButton_Clicked"
+                d:IsVisible="False" />
         </StackLayout>
     </Frame.Content>
 </Frame>

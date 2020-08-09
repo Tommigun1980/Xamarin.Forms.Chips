@@ -8,23 +8,35 @@ namespace Xamarin.Forms.Chips
         public static readonly BindableProperty TextProperty = BindableProperty.Create(
             nameof(Text), typeof(string), typeof(Chip));
 
-        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(
-            nameof(FontFamily), typeof(string), typeof(Chip));
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(
+            nameof(TextColor), typeof(Color), typeof(Chip));
 
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(
-            nameof(FontSize), typeof(double), typeof(Chip), Device.GetNamedSize(NamedSize.Default, typeof(Label)));
+        public static readonly BindableProperty TextStyleProperty = BindableProperty.Create(
+            nameof(TextStyle), typeof(Style), typeof(Chip));
 
         public static readonly BindableProperty ImageProperty = BindableProperty.Create(
             nameof(Image), typeof(ImageSource), typeof(Chip));
 
-        public static readonly BindableProperty ImageWidthRequestProperty = BindableProperty.Create(
-            nameof(ImageWidthRequest), typeof(double), typeof(Chip), -1.0);
+        public static readonly BindableProperty ImageStyleProperty = BindableProperty.Create(
+            nameof(ImageStyle), typeof(Style), typeof(Chip));
 
-        public static readonly BindableProperty ImageHeightRequestProperty = BindableProperty.Create(
-            nameof(ImageHeightRequest), typeof(double), typeof(Chip), -1.0);
+        public static readonly BindableProperty CloseButtonImageProperty = BindableProperty.Create(
+            nameof(CloseButtonImage), typeof(ImageSource), typeof(Chip));
 
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(
-            nameof(TextColor), typeof(Color), typeof(Chip), Color.DarkGray);
+        public static readonly BindableProperty CloseButtonImageStyleProperty = BindableProperty.Create(
+            nameof(CloseButtonImageStyle), typeof(Style), typeof(Chip));
+
+        public static readonly BindableProperty FontImageTextProperty = BindableProperty.Create(
+            nameof(FontImageText), typeof(string), typeof(Chip));
+
+        public static readonly BindableProperty FontImageStyleProperty = BindableProperty.Create(
+            nameof(FontImageStyle), typeof(Style), typeof(Chip));
+
+        public static readonly BindableProperty CloseButtonFontImageTextProperty = BindableProperty.Create(
+            nameof(CloseButtonFontImageText), typeof(string), typeof(Chip));
+
+        public static readonly BindableProperty CloseButtonFontImageStyleProperty = BindableProperty.Create(
+            nameof(CloseButtonFontImageStyle), typeof(Style), typeof(Chip));
 
         public static readonly BindableProperty ClickedCommandProperty = BindableProperty.Create(
             nameof(ClickedCommand), typeof(ICommand), typeof(Chip));
@@ -37,9 +49,6 @@ namespace Xamarin.Forms.Chips
 
         public static readonly BindableProperty CloseCommandParameterProperty = BindableProperty.Create(
             nameof(CloseCommandParameter), typeof(object), typeof(Chip));
-
-        public static readonly BindableProperty CloseImageProperty = BindableProperty.Create(
-            nameof(CloseImage), typeof(ImageSource), typeof(Chip));
 
         public static readonly BindableProperty IsToggleableProperty = BindableProperty.Create(
             nameof(IsToggleable), typeof(bool), typeof(Chip), propertyChanged: StatePropertyChanged);
@@ -79,17 +88,16 @@ namespace Xamarin.Forms.Chips
             set => SetValue(Chip.TextProperty, value);
         }
 
-        public string FontFamily
+        public Color TextColor
         {
-            get => (string)GetValue(Chip.FontFamilyProperty);
-            set => SetValue(Chip.FontFamilyProperty, value);
+            get => (Color)GetValue(Chip.TextColorProperty);
+            set => SetValue(Chip.TextColorProperty, value);
         }
 
-        [Xamarin.Forms.TypeConverter(typeof(FontSizeConverter))]
-        public double FontSize
+        public Style TextStyle
         {
-            get => (double)GetValue(Chip.FontSizeProperty);
-            set => SetValue(Chip.FontSizeProperty, value);
+            get => (Style)GetValue(Chip.TextStyleProperty);
+            set => SetValue(Chip.TextStyleProperty, value);
         }
 
         public ImageSource Image
@@ -98,22 +106,46 @@ namespace Xamarin.Forms.Chips
             set => SetValue(Chip.ImageProperty, value);
         }
 
-        public double ImageWidthRequest
+        public Style ImageStyle
         {
-            get => (double)GetValue(Chip.ImageWidthRequestProperty);
-            set => SetValue(Chip.ImageWidthRequestProperty, value);
+            get => (Style)GetValue(Chip.ImageStyleProperty);
+            set => SetValue(Chip.ImageStyleProperty, value);
         }
 
-        public double ImageHeightRequest
+        public ImageSource CloseButtonImage
         {
-            get => (double)GetValue(Chip.ImageHeightRequestProperty);
-            set => SetValue(Chip.ImageHeightRequestProperty, value);
+            get => (ImageSource)GetValue(Chip.CloseButtonImageProperty);
+            set => SetValue(Chip.CloseButtonImageProperty, value);
         }
 
-        public Color TextColor
+        public Style CloseButtonImageStyle
         {
-            get => (Color)GetValue(Chip.TextColorProperty);
-            set => SetValue(Chip.TextColorProperty, value);
+            get => (Style)GetValue(Chip.CloseButtonImageStyleProperty);
+            set => SetValue(Chip.CloseButtonImageStyleProperty, value);
+        }
+
+        public string FontImageText
+        {
+            get => (string)GetValue(Chip.FontImageTextProperty);
+            set => SetValue(Chip.FontImageTextProperty, value);
+        }
+
+        public Style FontImageStyle
+        {
+            get => (Style)GetValue(Chip.FontImageStyleProperty);
+            set => SetValue(Chip.FontImageStyleProperty, value);
+        }
+
+        public string CloseButtonFontImageText
+        {
+            get => (string)GetValue(Chip.CloseButtonFontImageTextProperty);
+            set => SetValue(Chip.CloseButtonFontImageTextProperty, value);
+        }
+
+        public Style CloseButtonFontImageStyle
+        {
+            get => (Style)GetValue(Chip.CloseButtonFontImageStyleProperty);
+            set => SetValue(Chip.CloseButtonFontImageStyleProperty, value);
         }
 
         public ICommand ClickedCommand
@@ -138,12 +170,6 @@ namespace Xamarin.Forms.Chips
         {
             get => GetValue(Chip.CloseCommandParameterProperty);
             set => SetValue(Chip.CloseCommandParameterProperty, value);
-        }
-
-        public ImageSource CloseImage
-        {
-            get => (ImageSource)GetValue(Chip.CloseImageProperty);
-            set => SetValue(Chip.CloseImageProperty, value);
         }
 
         public bool IsToggleable
