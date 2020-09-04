@@ -8,6 +8,9 @@ namespace Xamarin.Forms.Chips
         public static readonly BindableProperty TextProperty = BindableProperty.Create(
             nameof(Text), typeof(string), typeof(Chip));
 
+        public static readonly BindableProperty FormattedTextProperty = BindableProperty.Create(
+            nameof(FormattedText), typeof(FormattedString), typeof(Chip));
+
         public static readonly BindableProperty TextColorProperty = BindableProperty.Create(
             nameof(TextColor), typeof(Color), typeof(Chip));
 
@@ -86,6 +89,12 @@ namespace Xamarin.Forms.Chips
         {
             get => (string)GetValue(Chip.TextProperty);
             set => SetValue(Chip.TextProperty, value);
+        }
+
+        public FormattedString FormattedText
+        {
+            get => (FormattedString)GetValue(Chip.FormattedTextProperty);
+            set => SetValue(Chip.FormattedTextProperty, value);
         }
 
         public Color TextColor

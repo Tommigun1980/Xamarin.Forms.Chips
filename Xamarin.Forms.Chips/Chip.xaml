@@ -5,8 +5,8 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:converters="clr-namespace:Xamarin.Forms.Chips.Converters"
     xmlns:controls="clr-namespace:Xamarin.Forms.Chips"
+    xmlns:converters="clr-namespace:Xamarin.Forms.Chips.Converters"
     HasShadow="False"
     CornerRadius="15"
     VerticalOptions="Center"
@@ -20,6 +20,7 @@
     <Frame.Resources>
         <ResourceDictionary>
             <converters:HasValueConverter x:Key="HasValueConverter" />
+            <converters:AnyTrueMultiConverter x:Key="AnyTrueMultiConverter" />
         </ResourceDictionary>
     </Frame.Resources>
 
@@ -46,14 +47,21 @@
             
             <Label
                 Text="{Binding Text, Source={x:Reference chipRoot}}"
-                IsVisible="{Binding Text, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
+                FormattedText="{Binding FormattedText, Source={x:Reference chipRoot}}"
                 TextColor="{Binding TextColor, Source={x:Reference chipRoot}}"
                 Style="{Binding TextStyle, Source={x:Reference chipRoot}}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 VerticalTextAlignment="Center"
                 HorizontalTextAlignment="Center"
-                d:Text="Chip" />
+                d:Text="Chip">
+                <Label.IsVisible>
+                    <MultiBinding Converter="{StaticResource AnyTrueMultiConverter}">
+                        <Binding Path="Text" Converter="{StaticResource HasValueConverter}" Source="{x:Reference chipRoot}" />
+                        <Binding Path="FormattedText" Converter="{StaticResource HasValueConverter}" Source="{x:Reference chipRoot}" />
+                    </MultiBinding>
+                </Label.IsVisible>
+            </Label>
             
             <ImageButton
                 Source="{Binding CloseButtonImage, Source={x:Reference chipRoot}}"
