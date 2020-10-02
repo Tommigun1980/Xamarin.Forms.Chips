@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>1.0.9</PackageVersion>
+    <PackageVersion>1.0.10</PackageVersion>
     <Authors>Tommi Kiviniemi</Authors>
     <Description>Chip support for Xamarin.Forms.</Description>
     <Copyright>Copyright © 2020</Copyright>
@@ -39,10 +39,5 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Converters\HasValueConverter.cs">
       <IncludeInPackage>true</IncludeInPackage>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Chip.xaml">
-      <IncludeInPackage>true</IncludeInPackage>
-    </EmbeddedResource>
   </ItemGroup>
 </Project>

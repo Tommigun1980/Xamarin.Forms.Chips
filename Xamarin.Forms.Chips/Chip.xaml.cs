@@ -17,6 +17,9 @@ namespace Xamarin.Forms.Chips
         public static readonly BindableProperty TextStyleProperty = BindableProperty.Create(
             nameof(TextStyle), typeof(Style), typeof(Chip));
 
+        public static readonly BindableProperty LineBreakModeProperty = BindableProperty.Create(
+            nameof(LineBreakMode), typeof(LineBreakMode), typeof(Chip));
+
         public static readonly BindableProperty ImageProperty = BindableProperty.Create(
             nameof(Image), typeof(ImageSource), typeof(Chip));
 
@@ -107,6 +110,12 @@ namespace Xamarin.Forms.Chips
         {
             get => (Style)GetValue(Chip.TextStyleProperty);
             set => SetValue(Chip.TextStyleProperty, value);
+        }
+
+        public LineBreakMode LineBreakMode
+        {
+            get => (LineBreakMode)GetValue(Chip.LineBreakModeProperty);
+            set => SetValue(Chip.LineBreakModeProperty, value);
         }
 
         public ImageSource Image

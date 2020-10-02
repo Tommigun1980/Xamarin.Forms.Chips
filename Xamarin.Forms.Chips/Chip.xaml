@@ -50,6 +50,8 @@
                 FormattedText="{Binding FormattedText, Source={x:Reference chipRoot}}"
                 TextColor="{Binding TextColor, Source={x:Reference chipRoot}}"
                 Style="{Binding TextStyle, Source={x:Reference chipRoot}}"
+                MaxLines="1"
+                LineBreakMode="{Binding LineBreakMode, Source={x:Reference chipRoot}}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 VerticalTextAlignment="Center"
