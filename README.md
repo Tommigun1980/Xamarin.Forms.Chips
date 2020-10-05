@@ -16,6 +16,7 @@ And place it in your view:
 ```xaml
 <chips:Chip
     Text="Hello"
+    Padding="8, 5"
     OnClicked="Chip_Clicked" />
 ```
 
@@ -29,6 +30,7 @@ More advanced example:
     AutoToggle="True"
     OnClose="Chip_Closed"
     Text="World"
+    Padding="8, 5"
     IsSelected="{Binding IsEnabled, Mode=OneWay}"
     ClickedCommand="{Binding ChipClickedCommand}"
     ClickedCommandParameter="{Binding SomeParameter}"
