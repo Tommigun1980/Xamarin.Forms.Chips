@@ -44,6 +44,20 @@ namespace Xamarin.Forms.Chips
         public static readonly BindableProperty CloseButtonFontImageStyleProperty = BindableProperty.Create(
             nameof(CloseButtonFontImageStyle), typeof(Style), typeof(Chip));
 
+        public static readonly BindableProperty ForceCircleProperty = BindableProperty.Create(
+            nameof(ForceCircle), typeof(bool), typeof(Chip), propertyChanging: (BindableObject bindable, object oldValue, object newValue) =>
+            {
+                if ((bool)newValue)
+                {
+                    var layout = (Layout)bindable;
+                    if (layout.Padding.Left != layout.Padding.Top || layout.Padding.Left != layout.Padding.Right || layout.Padding.Left != layout.Padding.Bottom)
+                    {
+                        var max = Math.Max(Math.Max(Math.Max(layout.Padding.Left, layout.Padding.Top), layout.Padding.Right), layout.Padding.Bottom);
+                        layout.Padding = new Thickness(max, max, max, max);
+                    }
+                }
+            });
+
         public static readonly BindableProperty ClickedCommandProperty = BindableProperty.Create(
             nameof(ClickedCommand), typeof(ICommand), typeof(Chip));
 
@@ -87,6 +101,8 @@ namespace Xamarin.Forms.Chips
         public event EventHandler OnSelect;
 
         public event EventHandler OnUnselect;
+
+        private bool isForcingCircle;
 
         public string Text
         {
@@ -164,6 +180,12 @@ namespace Xamarin.Forms.Chips
         {
             get => (Style)GetValue(Chip.CloseButtonFontImageStyleProperty);
             set => SetValue(Chip.CloseButtonFontImageStyleProperty, value);
+        }
+
+        public bool ForceCircle
+        {
+            get => (bool)GetValue(Chip.ForceCircleProperty);
+            set => SetValue(Chip.ForceCircleProperty, value);
         }
 
         public ICommand ClickedCommand
@@ -252,6 +274,24 @@ namespace Xamarin.Forms.Chips
             {
                 this.CornerRadius = (float)(this.Height * 0.5);
             };
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            if (this.ForceCircle && !this.isForcingCircle && Math.Abs(width - height) >= 1.0)
+            {
+                this.isForcingCircle = true;
+
+                var max = Math.Max(width, height);
+                this.WidthRequest = max;
+                this.HeightRequest = max;
+            }
+            else
+            {
+                this.isForcingCircle = false;
+
+                base.OnSizeAllocated(width, height);
+            }
         }
 
         private void RefreshVisualState()
