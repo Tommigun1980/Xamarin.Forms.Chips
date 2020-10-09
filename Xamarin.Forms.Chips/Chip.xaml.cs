@@ -44,19 +44,8 @@ namespace Xamarin.Forms.Chips
         public static readonly BindableProperty CloseButtonFontImageStyleProperty = BindableProperty.Create(
             nameof(CloseButtonFontImageStyle), typeof(Style), typeof(Chip));
 
-        public static readonly BindableProperty ForceCircleProperty = BindableProperty.Create(
-            nameof(ForceCircle), typeof(bool), typeof(Chip), propertyChanging: (BindableObject bindable, object oldValue, object newValue) =>
-            {
-                if ((bool)newValue)
-                {
-                    var layout = (Layout)bindable;
-                    if (layout.Padding.Left != layout.Padding.Top || layout.Padding.Left != layout.Padding.Right || layout.Padding.Left != layout.Padding.Bottom)
-                    {
-                        var max = Math.Max(Math.Max(Math.Max(layout.Padding.Left, layout.Padding.Top), layout.Padding.Right), layout.Padding.Bottom);
-                        layout.Padding = new Thickness(max, max, max, max);
-                    }
-                }
-            });
+        public static readonly BindableProperty ForceWidthToAtLeastHeightProperty = BindableProperty.Create(
+            nameof(ForceWidthToAtLeastHeight), typeof(bool), typeof(Chip));
 
         public static readonly BindableProperty ClickedCommandProperty = BindableProperty.Create(
             nameof(ClickedCommand), typeof(ICommand), typeof(Chip));
@@ -102,7 +91,7 @@ namespace Xamarin.Forms.Chips
 
         public event EventHandler OnUnselect;
 
-        private bool isForcingCircle;
+        private bool isForcingWidth;
 
         public string Text
         {
@@ -182,10 +171,10 @@ namespace Xamarin.Forms.Chips
             set => SetValue(Chip.CloseButtonFontImageStyleProperty, value);
         }
 
-        public bool ForceCircle
+        public bool ForceWidthToAtLeastHeight
         {
-            get => (bool)GetValue(Chip.ForceCircleProperty);
-            set => SetValue(Chip.ForceCircleProperty, value);
+            get => (bool)GetValue(Chip.ForceWidthToAtLeastHeightProperty);
+            set => SetValue(Chip.ForceWidthToAtLeastHeightProperty, value);
         }
 
         public ICommand ClickedCommand
@@ -278,17 +267,15 @@ namespace Xamarin.Forms.Chips
 
         protected override void OnSizeAllocated(double width, double height)
         {
-            if (this.ForceCircle && !this.isForcingCircle && Math.Abs(width - height) >= 1.0)
+            if (this.ForceWidthToAtLeastHeight && !this.isForcingWidth && height - width >= 1.0)
             {
-                this.isForcingCircle = true;
+                this.isForcingWidth = true;
 
-                var max = Math.Max(width, height);
-                this.WidthRequest = max;
-                this.HeightRequest = max;
+                this.WidthRequest = height;
             }
             else
             {
-                this.isForcingCircle = false;
+                this.isForcingWidth = false;
 
                 base.OnSizeAllocated(width, height);
             }
