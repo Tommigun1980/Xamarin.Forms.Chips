@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>1.0.12</PackageVersion>
+    <PackageVersion>1.0.13</PackageVersion>
     <Authors>Tommi Kiviniemi</Authors>
     <Description>Chip support for Xamarin.Forms.</Description>
     <Copyright>Copyright © 2020</Copyright>
@@ -14,17 +14,19 @@
     <PackageId>Xamarin.Forms.Chips</PackageId>
     <PackageProjectUrl>https://github.com/Tommigun1980/Xamarin.Forms.Chips</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/Tommigun1980/Xamarin.Forms.Chips/blob/master/LICENSE</PackageLicenseUrl>
+    <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType></DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1238-pre3" />
-    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.5-dev.8">
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1931" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.5-pr173.12">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Converters\" />

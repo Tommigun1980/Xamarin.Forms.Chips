@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     mc:Ignorable="d"
     xmlns:controls="clr-namespace:Xamarin.Forms.Chips"
     xmlns:converters="clr-namespace:Xamarin.Forms.Chips.Converters"
@@ -20,6 +21,7 @@
         <ResourceDictionary>
             <converters:HasValueConverter x:Key="HasValueConverter" />
             <converters:AnyTrueMultiConverter x:Key="AnyTrueMultiConverter" />
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </Frame.Resources>
 
@@ -28,55 +30,63 @@
     </Frame.GestureRecognizers>
 
     <Frame.Content>
-        <StackLayout
-            Orientation="Horizontal"
-            VerticalOptions="Center"
-            HorizontalOptions="Center">
-            
-            <Image
-                Source="{Binding Image, Source={x:Reference chipRoot}}"
-                IsVisible="{Binding Image, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
-                Style="{Binding ImageStyle, Source={x:Reference chipRoot}}"
-                d:IsVisible="False" />
-            <Label
-                Text="{Binding FontImageText, Source={x:Reference chipRoot}}"
-                IsVisible="{Binding FontImageText, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
-                Style="{Binding FontImageStyle, Source={x:Reference chipRoot}}"
-                d:IsVisible="False" />
-            
-            <Label
-                Text="{Binding Text, Source={x:Reference chipRoot}}"
-                FormattedText="{Binding FormattedText, Source={x:Reference chipRoot}}"
-                TextColor="{Binding TextColor, Source={x:Reference chipRoot}}"
-                Style="{Binding TextStyle, Source={x:Reference chipRoot}}"
-                MaxLines="1"
-                LineBreakMode="{Binding LineBreakMode, Source={x:Reference chipRoot}}"
+        <StackLayout Orientation="Horizontal">
+            <!-- TODO: remove this stack layout and put xct properties in root, once https://github.com/xamarin/XamarinCommunityToolkit/issues/844 has been fixed -->
+            <!-- TODO: replace the long press command with an event once https://github.com/xamarin/XamarinCommunityToolkit/issues/851 has been fixed -->
+            <StackLayout
                 VerticalOptions="Center"
-                HorizontalOptions="Center"
-                VerticalTextAlignment="Center"
-                HorizontalTextAlignment="Center"
-                d:Text="Chip">
-                <Label.IsVisible>
-                    <MultiBinding Converter="{StaticResource AnyTrueMultiConverter}">
-                        <Binding Path="Text" Converter="{StaticResource HasValueConverter}" Source="{x:Reference chipRoot}" />
-                        <Binding Path="FormattedText" Converter="{StaticResource HasValueConverter}" Source="{x:Reference chipRoot}" />
-                    </MultiBinding>
-                </Label.IsVisible>
-            </Label>
+                Orientation="Horizontal"
+                xct:TouchEffect.NativeAnimation="{Binding IsDisabled, Source={x:Reference chipRoot}, Converter={StaticResource InvertedBoolConverter}}"
+                xct:TouchEffect.LongPressCommand="{Binding InternalLongPressCommand, Source={x:Reference chipRoot}}"
+                xct:TouchEffect.ShouldMakeChildrenInputTransparent="False">
+
+                <StackLayout VerticalOptions="Center">
+                    <Image
+                        Source="{Binding Image, Source={x:Reference chipRoot}}"
+                        IsVisible="{Binding Image, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
+                        Style="{Binding ImageStyle, Source={x:Reference chipRoot}}"
+                        d:IsVisible="False" />
+                    <Label
+                        Text="{Binding FontImageText, Source={x:Reference chipRoot}}"
+                        IsVisible="{Binding FontImageText, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
+                        Style="{Binding FontImageStyle, Source={x:Reference chipRoot}}"
+                        d:IsVisible="False" />
+                </StackLayout>
             
-            <ImageButton
-                Source="{Binding CloseButtonImage, Source={x:Reference chipRoot}}"
-                IsVisible="{Binding CloseButtonImage, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
-                Style="{Binding CloseButtonImageStyle, Source={x:Reference chipRoot}}"
-                Clicked="CloseButton_Clicked"
-                d:IsVisible="False" />
-            <Button
-                Text="{Binding CloseButtonFontImageText, Source={x:Reference chipRoot}}"
-                IsVisible="{Binding CloseButtonFontImageText, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
-                Style="{Binding CloseButtonFontImageStyle, Source={x:Reference chipRoot}}"
-                BackgroundColor="Transparent"
-                Clicked="CloseButton_Clicked"
-                d:IsVisible="False" />
+                <Label
+                    VerticalOptions="Center"
+                    Text="{Binding Text, Source={x:Reference chipRoot}}"
+                    FormattedText="{Binding FormattedText, Source={x:Reference chipRoot}}"
+                    TextColor="{Binding TextColor, Source={x:Reference chipRoot}}"
+                    Style="{Binding TextStyle, Source={x:Reference chipRoot}}"
+                    MaxLines="1"
+                    LineBreakMode="{Binding LineBreakMode, Source={x:Reference chipRoot}}"
+                    VerticalTextAlignment="Center"
+                    d:Text="Chip">
+                    <Label.IsVisible>
+                        <MultiBinding Converter="{StaticResource AnyTrueMultiConverter}">
+                            <Binding Path="Text" Converter="{StaticResource HasValueConverter}" Source="{x:Reference chipRoot}" />
+                            <Binding Path="FormattedText" Converter="{StaticResource HasValueConverter}" Source="{x:Reference chipRoot}" />
+                        </MultiBinding>
+                    </Label.IsVisible>
+                </Label>
+            </StackLayout>
+
+            <StackLayout VerticalOptions="Center">
+                <ImageButton
+                    Source="{Binding CloseButtonImage, Source={x:Reference chipRoot}}"
+                    IsVisible="{Binding CloseButtonImage, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
+                    Style="{Binding CloseButtonImageStyle, Source={x:Reference chipRoot}}"
+                    Clicked="CloseButton_Clicked"
+                    d:IsVisible="False" />
+                <Button
+                    Text="{Binding CloseButtonFontImageText, Source={x:Reference chipRoot}}"
+                    IsVisible="{Binding CloseButtonFontImageText, Source={x:Reference chipRoot}, Converter={StaticResource HasValueConverter}}"
+                    Style="{Binding CloseButtonFontImageStyle, Source={x:Reference chipRoot}}"
+                    BackgroundColor="Transparent"
+                    Clicked="CloseButton_Clicked"
+                    d:IsVisible="False" />
+            </StackLayout>
         </StackLayout>
     </Frame.Content>
 </Frame>

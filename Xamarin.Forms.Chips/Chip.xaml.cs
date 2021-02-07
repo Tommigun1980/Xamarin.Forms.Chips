@@ -249,6 +249,8 @@ namespace Xamarin.Forms.Chips
             set => SetValue(Chip.UnselectCommandParameterProperty, value);
         }
 
+        public ICommand InternalLongPressCommand { get; }
+
         private static void StatePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (newValue != oldValue)
@@ -257,6 +259,11 @@ namespace Xamarin.Forms.Chips
 
         public Chip()
         {
+            this.InternalLongPressCommand = new Command(() =>
+            {
+                this.FireEventAndCommand(this, new EventArgs(), this.OnClose, this.CloseCommand, this.CloseCommandParameter);
+            });
+
             InitializeComponent();
 
             this.SizeChanged += (object sender, EventArgs e) =>
@@ -293,10 +300,7 @@ namespace Xamarin.Forms.Chips
             if (this.IsDisabled)
                 return;
 
-            this.OnClicked?.Invoke(sender, args);
-
-            if (this.ClickedCommand != null && this.ClickedCommand.CanExecute(this.ClickedCommandParameter))
-                this.ClickedCommand.Execute(this.ClickedCommandParameter);
+            this.FireEventAndCommand(sender, args, this.OnClicked, this.ClickedCommand, this.ClickedCommandParameter);
 
             if (this.IsToggleable)
             {
@@ -307,31 +311,26 @@ namespace Xamarin.Forms.Chips
                 }
 
                 if (this.IsSelected)
-                {
-                    this.OnSelect?.Invoke(this, new EventArgs());
-
-                    if (this.SelectCommand != null && this.SelectCommand.CanExecute(this.SelectCommandParameter))
-                        this.SelectCommand.Execute(this.SelectCommandParameter);
-                }
+                    this.FireEventAndCommand(sender, new EventArgs(), this.OnSelect, this.SelectCommand, this.SelectCommandParameter);
                 else
-                {
-                    this.OnUnselect?.Invoke(this, new EventArgs());
-
-                    if (this.UnselectCommand != null && this.SelectCommand.CanExecute(this.UnselectCommandParameter))
-                        this.UnselectCommand.Execute(this.UnselectCommandParameter);
-                }
+                    this.FireEventAndCommand(sender, new EventArgs(), this.OnUnselect, this.UnselectCommand, this.UnselectCommandParameter);
             }
         }
 
         private void CloseButton_Clicked(object sender, EventArgs args)
         {
+            this.FireEventAndCommand(sender, args, this.OnClose, this.CloseCommand, this.CloseCommandParameter);
+        }
+
+        private void FireEventAndCommand(object sender, EventArgs args, EventHandler eventHandler, ICommand command, object commandParameter)
+        {
             if (this.IsDisabled)
                 return;
 
-            this.OnClose?.Invoke(sender, args);
+            eventHandler?.Invoke(sender, args);
 
-            if (this.CloseCommand != null && this.CloseCommand.CanExecute(this.CloseCommandParameter))
-                this.CloseCommand.Execute(this.CloseCommandParameter);
+            if (command != null && command.CanExecute(commandParameter))
+                command.Execute(commandParameter);
         }
     }
 }
