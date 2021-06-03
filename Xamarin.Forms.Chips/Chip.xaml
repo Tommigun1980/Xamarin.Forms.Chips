@@ -63,6 +63,9 @@
                     LineBreakMode="{Binding LineBreakMode, Source={x:Reference chipRoot}}"
                     VerticalTextAlignment="Center"
                     d:Text="Chip">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Clicked" />
+                    </Label.GestureRecognizers>
                     <Label.IsVisible>
                         <MultiBinding Converter="{StaticResource AnyTrueMultiConverter}">
                             <Binding Path="Text" Converter="{StaticResource HasValueConverter}" Source="{x:Reference chipRoot}" />
